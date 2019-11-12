@@ -25,16 +25,20 @@ extension AlarmScheduler {
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
         
         let request = UNNotificationRequest(identifier: "myAlarm", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request) { (_) in
-            print("User asked to get a local notification")
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("Failed to schedule notification")
+                print(error, error.localizedDescription)
+            }
+            print("Successfully scheduled notification")
         }
     }
     func cancelUserNotifications(for alarm: Alarm) {
-        
-    }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid])    }
 }
 
-class AlarmController {
+
+class AlarmController: AlarmScheduler {
     
     static let sharedInstance = AlarmController()
     
@@ -67,6 +71,12 @@ class AlarmController {
     //toggle switch for alarms
     func toggleIsOn(for alarm: Alarm) {
         alarm.isEnabled = !alarm.isEnabled
+        //is redundant but making sure
+        if alarm.isEnabled == true {
+            scheduleUserNotifications(for: alarm)
+        } else if alarm.isEnabled == false {
+            
+        }
     }
     
     
