@@ -5,8 +5,34 @@
 //  Created by Aaron Shackelford on 11/11/19.
 //  Copyright © 2019 trevorAdcock. All rights reserved.
 //
-
 import Foundation
+import UserNotifications
+
+protocol AlarmScheduler: class {
+    func scheduleUserNotifications(for alarm: Alarm)
+    func cancelUserNotifications(for alarm: Alarm)
+}
+extension AlarmScheduler {
+    func scheduleUserNotifications(for alarm: Alarm) {
+        let content = UNMutableNotificationContent()
+        content.title = "It's time"
+        content.body = "Your alarm is going off"
+        content.badge = 1
+        content.sound = .default()
+        
+        let components = Calendar.current.dateComponents([.hour, .minute], from: alarm.fireDate)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "myAlarm", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { (_) in
+            print("User asked to get a local notification")
+        }
+    }
+    func cancelUserNotifications(for alarm: Alarm) {
+        
+    }
+}
 
 class AlarmController {
     
@@ -15,23 +41,28 @@ class AlarmController {
     //SoT
     var myAlarms: [Alarm] = []
     
+    weak var delegate: AlarmScheduler?
+    
     // MARK: - CRUD Functions
     
     //create new alarm
     func addNewAlarm(fireDate: Date, name: String, isEnabled: Bool) {
         let newAlarm = Alarm(fireDate: fireDate, name: name, isEnabled: isEnabled)
             myAlarms.append(newAlarm)
+        saveToPersistentStore()
     }
     //update alarm
     func updateAlarm(alarm: Alarm, fireDate: Date, name: String, isEnabled: Bool) {
         alarm.fireDate = fireDate
         alarm.name = name
         alarm.isEnabled = isEnabled
+        saveToPersistentStore()
     }
     //delete existing alarm
     func deleteAlarm(alarm: Alarm) {
         guard let indexOfAlarm = myAlarms.firstIndex(of: alarm) else { return }
         myAlarms.remove(at: indexOfAlarm)
+        saveToPersistentStore()
     }
     //toggle switch for alarms
     func toggleIsOn(for alarm: Alarm) {
@@ -69,4 +100,4 @@ class AlarmController {
             print("ERROR loading from persistent store: \(error.localizedDescription)")
         }
     }
-}
+}//end of class

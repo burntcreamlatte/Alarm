@@ -12,6 +12,8 @@ class AlarmListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AlarmController.sharedInstance.loadFromPersistentStore()
     }
 
     override func viewWillAppear(_ animated: Bool) {

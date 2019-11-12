@@ -47,6 +47,6 @@ class SwitchTableViewCell: UITableViewCell {
     func updateViews(with alarm: Alarm) {
         nameLabel.text = alarm.name
         timeLabel.text = alarm.fireTimeAsString
-        alarmSwitch.isEnabled = alarm.isEnabled
+        alarmSwitch.isOn = alarm.isEnabled
     }
 }// End of class
