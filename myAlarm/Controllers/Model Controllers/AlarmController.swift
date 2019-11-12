@@ -12,7 +12,7 @@ class AlarmController {
     
     static let sharedInstance = AlarmController()
     
-    //does this need to be optional? ie: "[Alarm]?"
+    //SoT
     var myAlarms: [Alarm] = []
     
     // MARK: - CRUD Functions
@@ -36,5 +36,37 @@ class AlarmController {
     //toggle switch for alarms
     func toggleIsOn(for alarm: Alarm) {
         alarm.isEnabled = !alarm.isEnabled
+    }
+    
+    
+    // MARK: - Data Persistence Methods
+    func fileURL() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = paths[0]
+        let alarmLocation = "alarm.json"
+        let url = documentDirectory.appendingPathComponent(alarmLocation)
+        print(url)
+        return url
+    }
+    
+    func saveToPersistentStore() {
+        let jsonEncoder = JSONEncoder()
+        do {
+            let alarmData = try jsonEncoder.encode(myAlarms)
+            try alarmData.write(to: fileURL())
+        } catch {
+            print("ERROR encoding data: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadFromPersistentStore() {
+        let jsonDecoder = JSONDecoder()
+        do {
+            let alarmData = try Data(contentsOf: fileURL())
+            let decodedAlarms = try jsonDecoder.decode([Alarm].self, from: alarmData)
+            myAlarms = decodedAlarms
+        } catch {
+            print("ERROR loading from persistent store: \(error.localizedDescription)")
+        }
     }
 }

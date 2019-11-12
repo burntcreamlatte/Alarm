@@ -20,8 +20,8 @@
 
 /* Begin PBXFileReference section */
 		ABD4FF7D237A03DE0048C00A /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwitchTableViewCell.swift; path = "myAlarm/Views/Custom Views/SwitchTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
-		ABD4FF7F237A03F50048C00A /* AlarmListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListTableViewController.swift; sourceTree = SOURCE_ROOT; };
-		ABD4FF81237A04030048C00A /* AlarmDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDetailTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		ABD4FF7F237A03F50048C00A /* AlarmListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmListTableViewController.swift; path = "myAlarm/Controllers/View Controllers/AlarmListTableViewController.swift"; sourceTree = SOURCE_ROOT; };
+		ABD4FF81237A04030048C00A /* AlarmDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmDetailTableViewController.swift; path = "myAlarm/Controllers/View Controllers/AlarmDetailTableViewController.swift"; sourceTree = SOURCE_ROOT; };
 		ABD4FF83237A0A4E0048C00A /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = SOURCE_ROOT; };
 		ABD4FF87237A0A800048C00A /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		F7C203882131AD3400C3FC77 /* myAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +57,15 @@
 				ABD4FF7D237A03DE0048C00A /* SwitchTableViewCell.swift */,
 			);
 			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		ABDA5DC2237A6283005A5EC6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ABD4FF7F237A03F50048C00A /* AlarmListTableViewController.swift */,
+				ABD4FF81237A04030048C00A /* AlarmDetailTableViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		F7C2037F2131AD3400C3FC77 = {
@@ -98,8 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				ABD4FF86237A0A630048C00A /* Model Controllers */,
-				ABD4FF7F237A03F50048C00A /* AlarmListTableViewController.swift */,
-				ABD4FF81237A04030048C00A /* AlarmDetailTableViewController.swift */,
+				ABDA5DC2237A6283005A5EC6 /* View Controllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

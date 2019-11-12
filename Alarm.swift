@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Alarm: Equatable {
+class Alarm: Equatable, Codable {
     var fireDate: Date
     var name: String
     var uuid: String
